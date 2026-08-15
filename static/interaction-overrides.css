@@ -1,0 +1,7 @@
+/* Keep hover feedback clean and stable without rotation. */
+.room-card:hover .badge,.stat-card:hover .stat-icon{transform:scale(1.08)}
+.theme-toggle:hover{transform:scale(1.06)}
+.icon-link{font-size:0}.icon-link:after{content:"Invoice";font-size:11px;font-weight:700}
+.room-card details{display:none!important}
+.panel-head .text-link{font-size:0}.panel-head .text-link:after{content:"View availability";font-size:11px}
+.welcome-visual img{animation:welcomeImage 5s ease-in-out infinite;transform-origin:center}.welcome-visual:hover img{animation-play-state:paused}@keyframes welcomeImage{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.018)}}

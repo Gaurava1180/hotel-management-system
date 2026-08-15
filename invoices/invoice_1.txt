@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 1
+Guest Name: ppriya sharma
+Room: 1 (single)
+Stay: 2026-08-14 to 2026-08-15 (1 days)
+Room Charges: INR 1800.00
+GST (18%): INR 324.00
+Total: INR 2124.00

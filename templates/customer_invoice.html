@@ -1,0 +1,22 @@
+﻿{% extends "customer_base.html" %}
+{% block title %}Invoice #{{ guest['guestid'] }} | HotelOS{% endblock %}
+{% block heading %}Invoice{% endblock %}
+{% block content %}
+<div class="invoice-wrap"><div class="invoice-card">
+  <div class="invoice-head"><div><span class="eyebrow">HotelOS / Your receipt</span><h2>Guest invoice</h2></div><span class="invoice-number">#{{ guest['guestid'] }}</span></div>
+  <div class="invoice-meta">
+    <div><small>Guest</small><strong>{{ guest['nameofguest'] }}</strong></div>
+    <div><small>Room</small><strong>{{ guest['room_no'] }} · {{ guest['type_of_room']|title }}</strong></div>
+    <div><small>Stay</small><strong>{{ guest['cidate'] }} → {{ guest['codate'] }}</strong></div>
+  </div>
+  <div class="invoice-line"><span>Room charges <small>{{ guest['noofdays'] }} days</small></span><strong>₹{{ '%.2f'|format(room_charge) }}</strong></div>
+  <div class="invoice-line"><span>GST <small>18%</small></span><strong>₹{{ '%.2f'|format(gst) }}</strong></div>
+  <div class="invoice-total"><span>Total due</span><strong>₹{{ '%.2f'|format(guest['netpay']) }}</strong></div>
+  <p class="saved-note">Invoice saved to <strong>{{ invoice_path }}</strong></p>
+  <div class="invoice-actions">
+    <a class="btn secondary no-print" href="{{ url_for('customer_bookings') }}">← My bookings</a>
+    <button class="btn secondary no-print" type="button" onclick="window.print()">🖨 Print / PDF</button>
+    <a class="btn secondary no-print" href="{{ url_for('customer_invoice_download', guest_id=guest['guestid']) }}">⤓ Download .txt</a>
+  </div>
+</div></div>
+{% endblock %}

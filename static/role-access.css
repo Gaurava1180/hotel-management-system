@@ -1,0 +1,1 @@
+.role-staff-member .nav-link[href$="/staff"],.role-staff-member .nav-link[href$="/reports"],.role-staff-member .quick-link[href$="/reports"]{display:none!important}.role-staff-member .staff-record-panel,.role-staff-member .staff-layout,.role-staff-member .department-card{display:none!important}

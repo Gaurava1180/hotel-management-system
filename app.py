@@ -15,8 +15,6 @@ MYSQL_HOST = os.environ.get("MYSQL_HOST", "localhost")
 MYSQL_USER = os.environ.get("MYSQL_USER", "root")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "1234")
 MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE", "hotel")
-MYSQL_PORT = int(os.environ.get("MYSQL_PORT", "3306"))
-MYSQL_SSL = os.environ.get("MYSQL_SSL", "false").lower() in {"1", "true", "yes", "on"}
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "hotel-management-demo-key")
@@ -145,8 +143,6 @@ def connect_mysql(database=MYSQL_DATABASE):
         user=MYSQL_USER,
         password=MYSQL_PASSWORD,
         database=database,
-        port=MYSQL_PORT,
-        ssl={"ssl": {}} if MYSQL_SSL else None,
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=False,
     )
@@ -166,7 +162,7 @@ def close_db(exception=None):
 
 
 def init_db():
-    server = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PASSWORD, port=MYSQL_PORT, ssl={"ssl": {}} if MYSQL_SSL else None, autocommit=True)
+    server = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER, password=MYSQL_PASSWORD, autocommit=True)
     server.cursor().execute(f"CREATE DATABASE IF NOT EXISTS `{MYSQL_DATABASE}`")
     server.close()
     db = MySQLDatabase(connect_mysql())
@@ -995,4 +991,4 @@ def customer_invoice_download(guest_id):
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", "5001")))
+    app.run(debug=True, port=int(os.environ.get("PORT", "5001")))

@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 12
+Guest Name: kiren sahu
+Room: 227 (suite)
+Stay: 2026-08-14 to 2026-08-16 (2 days)
+Room Charges: INR 28000.00
+GST (18%): INR 5040.00
+Total: INR 33040.00

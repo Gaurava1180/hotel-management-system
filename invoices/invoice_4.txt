@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 4
+Guest Name: priyanka jan
+Room: 101 (triple)
+Stay: 2026-08-14 to 2026-08-19 (5 days)
+Room Charges: INR 19500.00
+GST (18%): INR 3510.00
+Total: INR 23010.00

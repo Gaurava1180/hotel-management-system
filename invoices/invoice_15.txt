@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 15
+Guest Name: rehem khan
+Room: 255 (presidential)
+Stay: 2026-08-14 to 2026-08-25 (11 days)
+Room Charges: INR 242000.00
+GST (18%): INR 43560.00
+Total: INR 285560.00

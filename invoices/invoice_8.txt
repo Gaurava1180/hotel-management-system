@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 8
+Guest Name: karan joot
+Room: 252 (presidential)
+Stay: 2026-08-14 to 2026-08-15 (1 days)
+Room Charges: INR 22000.00
+GST (18%): INR 3960.00
+Total: INR 25960.00

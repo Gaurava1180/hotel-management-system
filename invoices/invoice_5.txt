@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 5
+Guest Name: naman kaur
+Room: 152 (quad)
+Stay: 2026-08-14 to 2026-08-17 (3 days)
+Room Charges: INR 15600.00
+GST (18%): INR 2808.00
+Total: INR 18408.00

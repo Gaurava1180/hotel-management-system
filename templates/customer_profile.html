@@ -1,0 +1,31 @@
+﻿{% extends "customer_base.html" %}
+{% block title %}My Profile | HotelOS{% endblock %}
+{% block heading %}My Profile{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">{% endblock %}
+{% block content %}
+<section class="booking-hero"><div><span class="eyebrow">ACCOUNT SETTINGS</span><h2>Your profile<br><em>details.</em></h2><p>Keep your contact information up to date for a seamless stay experience.</p></div><div class="booking-hero-image"><img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=900&q=88" alt="Guest profile"><span><i class="status-dot"></i> Logged in</span></div></section>
+<section class="booking-layout">
+  <div class="panel booking-panel">
+    <form method="post" class="booking-form">
+      <div class="booking-section">
+        <div class="booking-section-title"><span>01</span><div><h3>Personal details</h3><p>Your name and contact info.</p></div></div>
+        <div class="form-grid">
+          <label>Full name<input name="name" value="{{ customer['name'] }}" required placeholder="Your full name"></label>
+          <label>Email address<input type="email" value="{{ customer['email'] }}" disabled style="opacity:.6;cursor:not-allowed" title="Email cannot be changed"></label>
+          <label>Phone<input type="tel" name="phone" value="{{ customer['phone'] or '' }}" placeholder="+91 98765 43210"></label>
+          <label>Address<input name="address" value="{{ customer['address'] or '' }}" placeholder="City, State"></label>
+        </div>
+      </div>
+      <div class="booking-submit"><p><span class="status-dot"></span> Changes are saved immediately.</p><button class="btn primary" type="submit">Save changes <span>→</span></button></div>
+    </form>
+  </div>
+  <aside class="booking-aside">
+    <div class="panel estimate-panel"><span class="eyebrow">ACCOUNT INFO</span><h2>Member since</h2>
+      <div class="estimate-total"><small>Registration date</small><strong>{{ customer['created_at'].strftime('%d %b %Y') if customer['created_at'] else '—' }}</strong></div>
+      <div class="estimate-row"><span>Status</span><b>{{ customer['status']|title }}</b></div>
+      <div class="estimate-row"><span>Email</span><b>{{ customer['email'] }}</b></div>
+    </div>
+    <div class="panel booking-tip"><span class="eyebrow">GUEST PORTAL</span><h3>Manage your<br>stay easily.</h3><p>View, download, and track all your bookings from one place.</p><a href="{{ url_for('customer_bookings') }}">View my bookings →</a></div>
+  </aside>
+</section>
+{% endblock %}

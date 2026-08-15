@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 11
+Guest Name: deepanshu kuamr tiwary
+Room: 201 (deluxe)
+Stay: 2026-08-14 to 2026-08-26 (12 days)
+Room Charges: INR 114000.00
+GST (18%): INR 20520.00
+Total: INR 134520.00

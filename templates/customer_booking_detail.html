@@ -1,0 +1,20 @@
+﻿{% extends "customer_base.html" %}
+{% block title %}Booking #{{ booking['original_guest_id'] }} | HotelOS{% endblock %}
+{% block heading %}Booking Detail{% endblock %}
+{% block content %}
+<div class="invoice-wrap"><div class="invoice-card">
+  <div class="invoice-head"><div><span class="eyebrow">HotelOS / Booking record</span><h2>Booking detail</h2></div><span class="invoice-number">#{{ booking['original_guest_id'] }}</span></div>
+  <div class="invoice-meta">
+    <div><small>Guest</small><strong>{{ booking['nameofguest'] }}</strong></div>
+    <div><small>Room</small><strong>{{ booking['room_no'] }} · {{ booking['type_of_room']|title }}</strong></div>
+    <div><small>Stay</small><strong>{{ booking['cidate'] }} → {{ booking['codate'] }}</strong></div>
+    <div><small>Nights</small><strong>{{ booking['noofdays'] }}</strong></div>
+    <div><small>Status</small><strong>{{ booking['status'] }}</strong></div>
+    <div><small>Total</small><strong>₹{{ '%.2f'|format(booking['netpay']) }}</strong></div>
+  </div>
+  <div class="invoice-actions">
+    <a class="btn secondary" href="{{ url_for('customer_bookings') }}">← My bookings</a>
+    <a class="btn primary" href="{{ url_for('customer_invoice', guest_id=booking['original_guest_id']) }}">View invoice ↗</a>
+  </div>
+</div></div>
+{% endblock %}

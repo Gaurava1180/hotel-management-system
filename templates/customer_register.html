@@ -1,0 +1,299 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Account | HotelOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand: #1a1f36;
+    --accent: #5a5ce2;
+    --accent-light: rgba(90,92,226,.08);
+    --border: #e4e7ef;
+    --muted: #6b7280;
+    --text: #111827;
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(30,40,80,.08), 0 1px 4px rgba(30,40,80,.06);
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: var(--text);
+    position: relative;
+  }
+
+  /* Subtle background decoration */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(90,92,226,.09), transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,31,54,.05), transparent 65%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Top brand bar */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 58px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 100;
+  }
+  .brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--text); }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: var(--brand); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .9rem;
+  }
+  .brand strong { font-size: .95rem; font-weight: 700; }
+  .brand small { display: block; font-size: .7rem; color: var(--muted); }
+  .top-bar-link { font-size: .83rem; color: var(--muted); text-decoration: none; font-weight: 500; }
+  .top-bar-link:hover { color: var(--accent); }
+
+  /* Main card */
+  .card {
+    position: relative; z-index: 1;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    width: 100%; max-width: 480px;
+    padding: 2.5rem 2.75rem;
+    margin-top: 58px;
+  }
+
+  .card-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: var(--accent-light); color: var(--accent);
+    font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+    padding: .32rem .75rem; border-radius: 2rem;
+    margin-bottom: 1rem; text-transform: uppercase;
+  }
+  .card-badge::before { content: '✦'; font-size: .7rem; }
+
+  .card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; font-weight: 700;
+    color: var(--brand); margin-bottom: .4rem; line-height: 1.2;
+  }
+  .card .subtitle { font-size: .88rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+  /* Flash messages */
+  .flash {
+    padding: .75rem 1rem; border-radius: 8px;
+    font-size: .85rem; margin-bottom: 1rem; font-weight: 500;
+  }
+  .flash.error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+  .flash.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+  /* Form rows — 2 column grid for name+email */
+  .form-row { display: grid; gap: 1rem; margin-bottom: 1rem; }
+  .form-row.two-col { grid-template-columns: 1fr 1fr; }
+
+  label {
+    display: flex; flex-direction: column; gap: .35rem;
+    font-size: .8rem; font-weight: 600; color: var(--text);
+  }
+  label .opt { font-weight: 400; color: var(--muted); font-size: .75rem; }
+
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="tel"], input[name="address"], input[name="name"] {
+    width: 100%;
+    padding: .7rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-family: inherit; font-size: .88rem; color: var(--text);
+    background: #fff;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+  }
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(90,92,226,.1);
+  }
+  input::placeholder { color: #c0c4d4; }
+
+  .password-wrap { position: relative; }
+  .password-wrap input { padding-right: 2.8rem; }
+  .eye-btn {
+    position: absolute; right: .8rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    display: flex; align-items: center; padding: 0;
+  }
+  .eye-btn:hover { color: var(--accent); }
+  .hidden { display: none; }
+
+  /* Divider */
+  .divider {
+    display: flex; align-items: center; gap: .75rem;
+    margin: 1.25rem 0; color: var(--muted); font-size: .75rem;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* Submit button */
+  .btn-primary {
+    width: 100%; padding: .85rem 1.5rem;
+    background: var(--brand); color: #fff;
+    border: none; border-radius: 10px;
+    font-family: inherit; font-size: .9rem; font-weight: 600;
+    cursor: pointer; transition: background .2s, transform .18s, box-shadow .18s;
+    display: flex; align-items: center; justify-content: center; gap: .5rem;
+    margin-top: 1.25rem;
+  }
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(90,92,226,.25);
+  }
+  .btn-primary .arrow { font-size: 1rem; }
+
+  /* Already have account */
+  .signin-link {
+    text-align: center; margin-top: 1.25rem;
+    font-size: .83rem; color: var(--muted);
+  }
+  .signin-link a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .signin-link a:hover { text-decoration: underline; }
+
+  /* Trust badges */
+  .trust-strip {
+    display: flex; justify-content: center; gap: 1.5rem;
+    margin-top: 1.5rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: .35rem;
+    font-size: .72rem; color: var(--muted); font-weight: 500;
+  }
+  .trust-icon { font-size: .85rem; }
+
+  @media (max-width: 520px) {
+    .card { padding: 2rem 1.5rem; }
+    .form-row.two-col { grid-template-columns: 1fr; }
+    .top-bar { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <a class="brand" href="{{ url_for('welcome') }}">
+      <div class="brand-mark">H</div>
+      <div><strong>HotelOS</strong><small>Guest portal</small></div>
+    </a>
+    <a class="top-bar-link" href="{{ url_for('customer_login') }}">Already have an account? Sign in →</a>
+  </header>
+
+  <!-- Card -->
+  <div class="card">
+    <div class="card-badge">New guest account</div>
+    <h1>Create your account</h1>
+    <p class="subtitle">Fill in your details to get started. It takes less than a minute.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="post" autocomplete="on">
+
+      <div class="form-row two-col">
+        <label>Full name
+          <input type="text" name="name" placeholder="Priya Sharma" required autocomplete="name">
+        </label>
+        <label>Phone <span class="opt">(optional)</span>
+          <input type="tel" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>Email address
+          <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </label>
+      </div>
+
+      <div class="form-row">
+        <label>Address <span class="opt">(optional)</span>
+          <input type="text" name="address" placeholder="City, State" autocomplete="street-address">
+        </label>
+      </div>
+
+      <div class="form-row two-col">
+        <label>Password
+          <div class="password-wrap">
+            <input type="password" name="password" id="pw1" placeholder="Min 6 chars" required autocomplete="new-password">
+            <button type="button" class="eye-btn" id="toggle-pw1" aria-label="Show password">
+              <svg id="eye-open-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eye-closed-1" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </label>
+        <label>Confirm password
+          <div class="password-wrap">
+            <input type="password" name="confirm_password" id="pw2" placeholder="Re-enter" required autocomplete="new-password">
+            <button type="button" class="eye-btn" id="toggle-pw2" aria-label="Show confirm password">
+              <svg id="eye-open-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="eye-closed-2" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </label>
+      </div>
+
+      <button class="btn-primary" type="submit">
+        Create account <span class="arrow">→</span>
+      </button>
+    </form>
+
+    <p class="signin-link">Already have an account? <a href="{{ url_for('customer_login') }}">Sign in here</a></p>
+
+    <div class="trust-strip">
+      <span class="trust-item"><span class="trust-icon">🔒</span> Secure & encrypted</span>
+      <span class="trust-item"><span class="trust-icon">🏨</span> 260 rooms available</span>
+      <span class="trust-item"><span class="trust-icon">⚡</span> Instant booking</span>
+    </div>
+  </div>
+
+<script>
+  function togglePw(btnId, inputId, openId, closedId) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const inp = document.getElementById(inputId);
+      const isText = inp.type === 'text';
+      inp.type = isText ? 'password' : 'text';
+      document.getElementById(openId).classList.toggle('hidden', !isText);
+      document.getElementById(closedId).classList.toggle('hidden', isText);
+    });
+  }
+  togglePw('toggle-pw1','pw1','eye-open-1','eye-closed-1');
+  togglePw('toggle-pw2','pw2','eye-open-2','eye-closed-2');
+</script>
+</body>
+</html>

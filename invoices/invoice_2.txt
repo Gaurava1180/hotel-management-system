@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 2
+Guest Name: aman sharma
+Room: 151 (quad)
+Stay: 2026-08-14 to 2026-08-25 (11 days)
+Room Charges: INR 57200.00
+GST (18%): INR 10296.00
+Total: INR 67496.00

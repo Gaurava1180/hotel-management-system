@@ -1,0 +1,1 @@
+.theme-toggle .sun{display:grid!important}.theme-toggle .moon{display:none!important}:root.dark-mode .theme-toggle .sun{display:none!important}:root.dark-mode .theme-toggle .moon{display:grid!important}

@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 7
+Guest Name: amit jan
+Room: 102 (triple)
+Stay: 2026-08-14 to 2026-08-25 (11 days)
+Room Charges: INR 42900.00
+GST (18%): INR 7722.00
+Total: INR 50622.00

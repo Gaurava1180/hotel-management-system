@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 10
+Guest Name: mayank shukala
+Room: 226 (suite)
+Stay: 2026-08-14 to 2026-08-15 (1 days)
+Room Charges: INR 14000.00
+GST (18%): INR 2520.00
+Total: INR 16520.00

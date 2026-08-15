@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 9
+Guest Name: ram prakas jaan
+Room: 253 (presidential)
+Stay: 2026-08-14 to 2026-08-21 (7 days)
+Room Charges: INR 154000.00
+GST (18%): INR 27720.00
+Total: INR 181720.00

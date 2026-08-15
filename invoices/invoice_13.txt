@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 13
+Guest Name: priya sharma
+Room: 202 (deluxe)
+Stay: 2026-08-14 to 2026-08-19 (5 days)
+Room Charges: INR 47500.00
+GST (18%): INR 8550.00
+Total: INR 56050.00

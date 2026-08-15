@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 19
+Guest Name: Rahul Test
+Room: 1 (single)
+Stay: 2026-08-18 to 2026-08-20 (2 days)
+Room Charges: INR 3600.00
+GST (18%): INR 648.00
+Total: INR 4248.00

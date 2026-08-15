@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HotelOS — Hospitality, beautifully managed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='interaction-overrides.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-motion.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='landing-sections.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='cinematic-stay.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stay-depth.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stay-smooth.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='room-showcase.css') }}?v=2.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='royal-presentation.css') }}?v=2.0">
+</head>
+<body class="landing-page">
+  <!-- Cinematic Loader -->
+  <div class="cinematic-loader" id="cinematic-loader">
+    <div class="loader-content">
+      <div class="loader-logo">H</div>
+      <div class="loader-line-container">
+        <div class="loader-line"></div>
+      </div>
+      <div class="loader-text">HotelOS</div>
+    </div>
+  </div>
+
+  <header class="landing-nav">
+    <a class="landing-brand" href="{{ url_for('welcome') }}"><span class="landing-mark">H</span><span><b>HotelOS</b><small>Hospitality, simplified</small></span></a>
+    <nav class="landing-links" aria-label="Main navigation"><a href="#experience">Experience</a><a href="#features">What we do</a><a href="#contact-details">Contact</a></nav>
+    <div class="landing-login-group" style="display:flex;align-items:center;gap:.75rem;">
+      <a class="landing-login guest-btn" href="{{ url_for('customer_login') }}" style="background:transparent;border:1.5px solid rgba(255,255,255,.45);color:#fff;padding:.5rem 1.1rem;border-radius:2rem;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;">Guest Login ↗</a>
+      <a class="landing-login guest-register" href="{{ url_for('customer_register') }}">Create account</a>
+      <a class="landing-login" href="{{ url_for('login') }}">Staff Sign in <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="landing-hero">
+      <div class="landing-hero-video-container">
+        <video class="landing-hero-video active" autoplay muted playsinline id="hero-video-1">
+          <source src="{{ url_for('static', filename='videos/entrance.mp4') }}" type="video/mp4">
+        </video>
+        <video class="landing-hero-video" muted playsinline id="hero-video-2">
+          <source src="{{ url_for('static', filename='videos/room.mp4') }}" type="video/mp4">
+        </video>
+        <video class="landing-hero-video" muted playsinline id="hero-video-3">
+          <source src="{{ url_for('static', filename='videos/pool.mp4') }}" type="video/mp4">
+        </video>
+      </div>
+      <div class="landing-hero-image" role="img" aria-label="Luxury hotel lounge"></div>
+      <div class="hero-photo-stack" aria-hidden="true"><div class="hero-photo photo-a"></div><div class="hero-photo photo-b"></div><div class="hero-photo photo-c"></div></div>
+      <div class="landing-overlay"></div>
+      <div class="landing-hero-content">
+        <p class="landing-kicker">THE HOTEL OPERATING SUITE <i></i> EST. 2026</p>
+        <h1>Stay in the<br><em>moment.</em></h1>
+        <p class="landing-lede">A refined workspace for the people who make every stay feel unforgettable.</p>
+        <div class="landing-actions"><a class="landing-button light" href="{{ url_for('customer_register') }}">Book a room <span>↗</span></a><a class="landing-text-link" href="{{ url_for('login') }}">Staff workspace <span>→</span></a></div>
+      </div>
+      <div class="hero-side-note">ROOMS <span>•</span> GUESTS <span>•</span> REVENUE</div>
+      <div class="hero-scroll">Scroll to explore <span></span></div>
+    </section>
+
+    <section id="experience" class="intro-section landing-reveal"><div class="intro-background-photo" aria-hidden="true"></div><div class="intro-photo-side" aria-hidden="true"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=88" alt="Hotel lounge detail"></div>
+      <div class="section-label">01 <span></span> THE EXPERIENCE</div>
+      <div class="intro-copy"><p class="serif-display">The quiet confidence of a hotel that runs beautifully.</p><p class="intro-description">From the first booking to the final invoice, HotelOS gives your team one composed view of the day — so your guests can have all of yours.</p><a class="underlined-link" href="{{ url_for('login') }}">Step inside HotelOS <span>↗</span></a></div>
+      <div class="intro-stat"><strong>260</strong><span>rooms ready<br>to be managed</span></div>
+    </section>
+
+    <section id="features" class="stay-section">
+      <div class="section-heading landing-reveal"><div><div class="section-label">02 <span></span> MADE FOR HOSPITALITY</div><h2>Every detail,<br><em>in its place.</em></h2></div><p>Tools that feel as considered as the spaces you create.</p></div>
+      <div class="stay-grid">
+        <article class="stay-card tall landing-reveal"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1100&q=88" alt="Elegant hotel bedroom" loading="lazy"><div class="stay-card-overlay"></div><div class="stay-card-copy"><span>01 — OPERATIONS</span><h3>A clear view<br>of every room.</h3></div></article>
+        <article class="stay-card landing-reveal"><img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=88" alt="Hotel lobby" loading="lazy"><div class="stay-card-overlay"></div><div class="stay-card-copy"><span>02 — EXPERIENCE</span><h3>More time<br>for your guests.</h3></div></article>
+        <article class="stay-card landing-reveal"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=88" alt="Luxury hotel exterior" loading="lazy"><div class="stay-card-overlay"></div><div class="stay-card-copy"><span>03 — CLARITY</span><h3>Decisions made<br>with confidence.</h3></div></article>
+      </div>
+    </section>
+
+    <section id="contact" class="landing-cta landing-reveal"><p class="landing-kicker">A BETTER WAY TO WELCOME PEOPLE</p><h2>Make room for<br><em>what matters.</em></h2><div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;"><a class="landing-button dark" href="{{ url_for('customer_register') }}">Book a room ↗</a><a class="landing-button light" href="{{ url_for('login') }}" style="background:transparent;border:1.5px solid currentColor;">Staff workspace →</a></div></section>
+  </main>
+  <section id="contact-details" class="contact-section landing-reveal"><div class="contact-intro"><p class="landing-kicker">03 <i></i> CONTACT</p><h2>Let's make<br><em>room for more.</em></h2><p>Have a question about HotelOS or want to bring calmer operations to your property? Our team is ready to help.</p></div><div class="contact-grid"><a class="contact-card" href="tel:+919876543210"><span class="contact-icon">✆</span><small>CALL OUR TEAM</small><strong>+91 98765 43210</strong><span>Mon–Sat, 9:00 AM–6:00 PM</span></a><a class="contact-card" href="mailto:hello@hotelos.in"><span class="contact-icon">✉</span><small>WRITE TO US</small><strong>hello@hotelos.in</strong><span>We reply within one business day</span></a><div class="contact-card"><span class="contact-icon">⌖</span><small>VISIT OUR STUDIO</small><strong>New Delhi, India</strong><span>Hospitality operations, worldwide</span></div></div><div class="contact-actions"><a class="landing-button dark" href="{{ url_for('customer_register') }}">Book a room ↗</a><a class="underlined-link" href="{{ url_for('customer_login') }}">Guest login <span>↗</span></a><a class="underlined-link" href="{{ url_for('login') }}">Staff login <span>↗</span></a></div></section>
+  <footer class="landing-footer"><span>© 2026 HotelOS</span><span>Made for modern hospitality</span><div style="display:flex;gap:1.5rem;"><a href="{{ url_for('customer_login') }}">Guest sign in ↗</a><a href="{{ url_for('login') }}">Staff sign in ↗</a></div></footer>
+  <script src="{{ url_for('static', filename='app.js') }}?v=2.0"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const videos = document.querySelectorAll('.landing-hero-video');
+      
+      if (videos.length > 1) {
+        // Play the first active video
+        videos[0].play().catch(e => console.log('Autoplay deferred:', e));
+        
+        videos.forEach((video, index) => {
+          video.addEventListener('ended', () => {
+            const nextIdx = (index + 1) % videos.length;
+            
+            // Initiate fade out on current active video and fade in on next
+            video.classList.remove('active');
+            videos[nextIdx].classList.add('active');
+            
+            // Reset and play next video
+            videos[nextIdx].currentTime = 0;
+            videos[nextIdx].play().catch(e => console.log('Transition play deferred:', e));
+            
+            // Pause previous video after fade transition completes
+            setTimeout(() => {
+              if (!video.classList.contains('active')) {
+                video.pause();
+              }
+            }, 1500);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

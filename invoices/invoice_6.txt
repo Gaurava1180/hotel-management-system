@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 6
+Guest Name: naman joot
+Room: 251 (presidential)
+Stay: 2026-08-14 to 2026-08-19 (5 days)
+Room Charges: INR 110000.00
+GST (18%): INR 19800.00
+Total: INR 129800.00

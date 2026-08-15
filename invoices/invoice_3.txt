@@ -1,0 +1,8 @@
+HOTELOS INVOICE
+Guest ID: 3
+Guest Name: priyanshu sharma
+Room: 51 (double)
+Stay: 2026-08-14 to 2026-08-20 (6 days)
+Room Charges: INR 16800.00
+GST (18%): INR 3024.00
+Total: INR 19824.00
