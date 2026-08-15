@@ -1,0 +1,41 @@
+{% extends "customer_base.html" %}
+{% block title %}My Bookings | HotelOS{% endblock %}
+{% block heading %}My Bookings{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='guests-page.css') }}">
+<style>
+  .guests-hero {
+    margin-bottom: 2.5rem;
+  }
+  .guests-hero .btn.primary {
+    margin-top: 1.5rem;
+  }
+  .guests-section {
+    margin-top: 1.5rem;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<section class="guests-hero"><div><span class="eyebrow">BOOKING HISTORY</span><h2>All your stays<br><em>in one place.</em></h2><p>View, track, and download invoices for all your bookings.</p><a class="btn primary" href="{{ url_for('customer_book') }}">＋ New booking <span>→</span></a></div></section>
+<section class="guests-section">
+  {% if bookings %}
+  <div class="panel">
+    <div class="panel-head"><div><span class="eyebrow">COMPLETE HISTORY</span><h2>Your bookings ({{ bookings|length }})</h2></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Booking ID</th><th>Room</th><th>Stay</th><th>Dates</th><th>Status</th><th>Total</th><th></th></tr></thead><tbody>
+    {% for b in bookings %}
+    <tr>
+      <td><small>#{{ b['permanent_guest_id'] }}</small></td>
+      <td><span class="room-pill">{{ b['room_no'] }}</span><small>{{ b['type_of_room']|title }}</small></td>
+      <td><strong>{{ b['noofdays'] }} nights</strong></td>
+      <td><small>{{ b['cidate'] }} → {{ b['codate'] }}</small></td>
+      <td><span class="badge {% if b['status'] == 'Booked' %}online{% else %}offline{% endif %}">{{ b['status'] }}</span></td>
+      <td><strong>₹{{ '%.0f'|format(b['netpay']) }}</strong></td>
+      <td><a class="icon-link" title="View invoice" href="{{ url_for('customer_invoice', guest_id=b['original_guest_id']) }}">↗</a></td>
+    </tr>{% endfor %}
+    </tbody></table></div>
+  </div>
+  {% else %}
+  <div class="empty-state"><span>⌂</span><h3>No bookings yet</h3><p>Book your first room to see it here.</p><a class="btn primary" href="{{ url_for('customer_book') }}">Book a room</a></div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}HotelOS{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='extended.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='interaction-overrides.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='visual.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='toggle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='sun-moon-toggle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='clean-moon-toggle.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='toggle-center.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='toggle-visibility.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='professional-toggle-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='moon-professional.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='toggle-transition.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='role-access.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='room-filters.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='royal-presentation.css') }}">
+  <style>
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body class="role-{{ session.get('role', 'guest')|lower|replace(' ', '-') }}">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">H</span><div><strong>HotelOS</strong><small>Management suite</small></div></div>
+      <nav>
+        <p class="nav-label">Workspace</p>
+        <a class="nav-link {% if active == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg> Dashboard</a>
+        <a class="nav-link {% if active == 'add' %}active{% endif %}" href="{{ url_for('add_guest') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="12" y1="14" x2="12" y2="20"></line><line x1="9" y1="17" x2="15" y2="17"></line></svg> New booking</a>
+        <a class="nav-link {% if active == 'guests' %}active{% endif %}" href="{{ url_for('guests') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Guest records</a>
+        <a class="nav-link {% if active == 'availability' %}active{% endif %}" href="{{ url_for('availability') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"></path></svg> Room availability</a>
+        <a class="nav-link {% if active == 'staff' %}active{% endif %}" href="{{ url_for('staff') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg> Staff records</a>
+        <a class="nav-link {% if active == 'reports' %}active{% endif %}" href="{{ url_for('reports') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Reports</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="support-card"><span class="status-dot"></span><div><strong>System online</strong><small>Local operations mode</small></div></div><a class="nav-link logout" href="{{ url_for('logout') }}"><svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign out</a></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><span class="eyebrow">{{ session.get('role', 'Workspace') }}</span><h1>{% block heading %}Operations overview{% endblock %}</h1><span class="live-time" id="live-time"></span></div><div class="topbar-actions"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode"><span class="sun">☼</span><span class="moon">◐</span></button><div class="user-chip"><span class="avatar">{{ session.get('user', 'A')[0]|upper }}</span><div><strong>{{ session.get('user', 'admin')|title }}</strong><small>Signed in</small></div></div></div></header>
+      {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-stack">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}<button onclick="this.parentElement.remove()">×</button></div>{% endfor %}</div>{% endif %}{% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <div class="modal-overlay hidden" id="confirm-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-icon">⚠️</span>
+        <div>
+          <h3 id="modal-title">Confirm action</h3>
+          <p id="modal-message" class="muted">Are you sure you want to proceed?</p>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn secondary" type="button" id="modal-cancel">Cancel</button>
+        <button class="btn danger" type="button" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

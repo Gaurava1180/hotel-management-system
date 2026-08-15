@@ -1,0 +1,35 @@
+﻿{% extends "customer_base.html" %}
+{% block title %}Book a Room | HotelOS{% endblock %}
+{% block heading %}Book a Room{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">{% endblock %}
+{% block content %}
+<section class="booking-hero"><div><span class="eyebrow">GUEST BOOKING · SECURE</span><h2>Reserve your<br><em>perfect room.</em></h2><p>Select your room type, dates, and confirm. We handle the rest.</p></div><div class="booking-hero-image"><img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=900&q=88" alt="Elegant hotel room"><span><i class="status-dot"></i> Rooms are ready</span></div></section>
+<section class="booking-layout">
+  <div class="panel booking-panel">
+    <form method="post" class="booking-form">
+      <input type="hidden" name="booking_token" value="{{ booking_token }}">
+      <div class="booking-section">
+        <div class="booking-section-title"><span>01</span><div><h3>Guest details</h3><p>Confirm the guest name for this stay.</p></div></div>
+        <div class="form-grid">
+          <label>Guest name<input name="name" value="{{ customer_name }}" placeholder="Your full name" required></label>
+        </div>
+      </div>
+      <div class="booking-section">
+        <div class="booking-section-title"><span>02</span><div><h3>Stay details</h3><p>Choose your room type and dates.</p></div></div>
+        <div class="form-grid">
+          <label>Room type<select name="room_type" id="room_type">{% for room_type, rate in room_rates.items() %}<option value="{{ room_type }}" {% if room_type == preselect %}selected{% endif %}>{{ room_type|title }} — INR {{ '{:,.0f}'.format(rate) }} / day</option>{% endfor %}</select></label>
+          <label>Choose room number<select name="room_no" id="room_no"><option value="">Auto-assign first available room</option>{% for room_type, rooms in room_options.items() %}{% for room in rooms %}<option value="{{ room }}" data-room-type="{{ room_type }}">Room {{ room }} — {{ room_type|title }}</option>{% endfor %}{% endfor %}</select></label>
+          <label>Check-in<input type="date" name="check_in" id="check_in" value="{{ today }}" required></label>
+          <label>Check-out<input type="date" name="check_out" id="check_out" value="{{ today }}" required></label>
+        </div>
+      </div>
+      <div class="booking-submit"><p><span class="status-dot"></span> Booking is confirmed instantly.</p><button class="btn primary" type="submit">Confirm booking <span>→</span></button></div>
+    </form>
+  </div>
+  <aside class="booking-aside">
+    <div class="panel estimate-panel"><span class="eyebrow">BOOKING ESTIMATE</span><h2>Billing preview</h2><div class="estimate-total"><small>Total including 18% GST</small><strong id="est-total">₹0</strong><span id="est-details">Select valid dates</span></div><div class="estimate-row"><span>Room rate</span><b id="est-rate">₹0 / day</b></div><div class="estimate-row"><span>Stay duration</span><b id="est-days">0 days</b></div><div class="estimate-row"><span>GST</span><b>18%</b></div></div>
+    <div class="panel booking-tip"><span class="eyebrow">SECURE BOOKING</span><h3>Your stay,<br>guaranteed.</h3><p>All bookings are instantly confirmed and visible in your dashboard.</p><a href="{{ url_for('customer_rooms') }}">Browse rooms →</a></div>
+  </aside>
+</section>
+<script>const roomType=document.getElementById('room_type'),roomSelect=document.getElementById('room_no'),ciInput=document.getElementById('check_in'),coInput=document.getElementById('check_out'),estTotal=document.getElementById('est-total'),estDetails=document.getElementById('est-details'),estRate=document.getElementById('est-rate'),estDays=document.getElementById('est-days'),rates={{ room_rates|tojson }};function filterRooms(){const type=roomType.value;Array.from(roomSelect.options).forEach(option=>{if(!option.dataset.roomType){option.hidden=false;return}option.hidden=option.dataset.roomType!==type;if(option.hidden&&option.selected)roomSelect.value='';});}function updateEstimate(){const type=roomType.value,rate=Number(rates[type]||0);estRate.textContent='₹'+rate.toLocaleString('en-IN')+' / day';const ci=new Date(ciInput.value),co=new Date(coInput.value);if(ciInput.value&&coInput.value&&co>ci){const days=Math.round((co-ci)/(1000*60*60*24)),total=Math.round(rate*days*1.18);estTotal.textContent='₹'+total.toLocaleString('en-IN');estDays.textContent=days+' day(s)';estDetails.textContent=days+' day(s) × ₹'+rate.toLocaleString('en-IN')+' + GST';}else{estTotal.textContent='₹0';estDays.textContent='0 days';estDetails.textContent='Select valid check-in & check-out dates';}}roomType.addEventListener('change',()=>{filterRooms();updateEstimate()});ciInput.addEventListener('change',updateEstimate);coInput.addEventListener('change',updateEstimate);filterRooms();updateEstimate();</script>
+{% endblock %}
