@@ -358,6 +358,24 @@ em {
   background: #182336 !important;
 }
 
+:root.dark-mode .date-input:focus-within > input[type="text"] {
+  background: #182336 !important;
+  color: var(--dark-text) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 4px rgba(191, 157, 102, 0.18) !important;
+}
+
+:root.dark-mode .date-picker-button {
+  background: #1e2b40 !important;
+  color: var(--gold) !important;
+  border: 1px solid var(--dark-line) !important;
+}
+
+:root.dark-mode .date-picker-button:hover {
+  background: var(--gold-grad) !important;
+  color: #fff !important;
+}
+
 :root.dark-mode .record-metrics > div,
 :root.dark-mode .records-panel,
 :root.dark-mode .records-panel table,
