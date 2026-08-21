@@ -13,13 +13,15 @@ from flask import Flask, flash, g, redirect, render_template, request, session, 
 BASE_DIR = Path(__file__).resolve().parent
 MYSQL_HOST = os.environ.get("MYSQL_HOST", "localhost")
 MYSQL_USER = os.environ.get("MYSQL_USER", "root")
-MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "1234")
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "")
 MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE", "hotel")
 MYSQL_PORT = int(os.environ.get("MYSQL_PORT", "3306"))
 MYSQL_SSL = os.environ.get("MYSQL_SSL", "false").lower() in {"1", "true", "yes", "on"}
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "hotel-management-demo-key")
+# Deployments should provide SECRET_KEY; the random fallback avoids shipping a
+# predictable signing key while keeping local development convenient.
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
 
 ROOM_RANGES = {
     "single": range(1, 51),
@@ -370,12 +372,13 @@ def inject_globals():
 def login():
     if request.method == "POST":
         users = {
-            "admin": ("admin123", "Administrator"),
-            "staff": ("staff123", "Staff member"),
+            "admin": (os.environ.get("ADMIN_PASSWORD", ""), "Administrator"),
+            "staff": (os.environ.get("STAFF_PASSWORD", ""), "Staff member"),
         }
         username = request.form.get("username", "").strip().lower()
         password = request.form.get("password", "")
-        if username in users and users[username][0] == password:
+        configured_password = users.get(username, ("", ""))[0]
+        if configured_password and secrets.compare_digest(configured_password, password):
             session.clear()
             session["user"] = username
             session["role"] = users[username][1]
@@ -1002,4 +1005,5 @@ def customer_invoice_download(guest_id):
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True, port=int(os.environ.get("PORT", "5001")))
+    debug = os.environ.get("FLASK_DEBUG", "0").lower() in {"1", "true", "yes", "on"}
+    app.run(debug=debug, port=int(os.environ.get("PORT", "5001")))
