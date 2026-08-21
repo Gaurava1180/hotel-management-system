@@ -19,6 +19,8 @@ Set these environment variables in Render:
 - `MYSQL_DATABASE`
 - `MYSQL_SSL` (`true` for hosted MySQL such as Aiven)
 - `SECRET_KEY`
+- `ADMIN_PASSWORD`
+- `STAFF_PASSWORD`
 
 The MySQL database must already exist and the database user must have permission to create/alter the application's tables.
 
